@@ -1,0 +1,161 @@
+/* ===== Batcave theme: dark rock, gold light strips, night sky ===== */
+:root, .encore-dark-theme, .encore-base-set {
+  --gold: #C8102E;
+  --gold-glow: rgba(200,16,46,.35);
+  --background-base: #0B0B0D !important;
+  --background-highlight: #1A0F11 !important;
+  --background-press: #050506 !important;
+  --background-elevated-base: #141416 !important;
+  --background-elevated-highlight: #2A1418 !important;
+  --text-base: #F5E6E8 !important;
+  --text-subdued: #B39A9E !important;
+  --text-bright-accent: #E8283F !important;
+  --essential-bright-accent: #C8102E !important;
+  --decorative-base: #C8102E !important;
+}
+
+/* Starry night sky behind the main view */
+.Root__main-view, .main-view-container {
+  background-color: #07070A !important;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 47% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 78%, #fff 50%, transparent 51%),
+    radial-gradient(1.3px 1.3px at 81% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 55%, #fff 50%, transparent 51%),
+    radial-gradient(ellipse at 55% 0%, rgba(120,120,140,.22), transparent 55%) !important;
+}
+
+/* Rocky cave texture on the sidebar */
+.Root__nav-bar {
+  background-color: #070708 !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.02 0.045' numOctaves='5' seed='7'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  0 0 0 0.22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>") !important;
+}
+
+/* Warm gold light strips along the panels */
+.Root__nav-bar, .Root__main-view, .Root__right-sidebar, .Root__now-playing-bar {
+  box-shadow: inset 0 0 0 1px rgba(200,16,46,.25),
+              0 0 18px rgba(200,16,46,.18) !important;
+  border-radius: 8px;
+}
+
+/* Bat silhouette watermark (simple original shape) */
+.Root__main-view::after {
+  content: "";
+  position: fixed; right: 5vw; bottom: 14vh;
+  width: 260px; height: 130px;
+  pointer-events: none; opacity: .07;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><path fill='%23C8102E' d='M100 8 L110 28 Q125 20 140 24 Q160 30 198 12 Q180 40 170 62 Q150 52 135 70 Q120 62 112 90 L100 72 L88 90 Q80 62 65 70 Q50 52 30 62 Q20 40 2 12 Q40 30 60 24 Q75 20 90 28 Z'/></svg>") center/contain no-repeat;
+}
+
+/* Gold glowing play button and progress bar */
+.encore-inverted-light-set {
+  --background-base: #C8102E !important;
+  --background-highlight: #E8283F !important;
+  --background-press: #8F0D24 !important;
+  --text-base: #FFFFFF !important;
+}
+button[data-testid="control-button-playpause"] {
+  box-shadow: 0 0 14px var(--gold-glow);
+}
+.playback-progressbar {
+  --fg-color: #C8102E !important;
+  --progress-bar-active-color: #E8283F !important;
+}
+
+/* Hover glow on cards and rows */
+.main-card-card:hover, [data-testid="tracklist-row"]:hover {
+  box-shadow: 0 0 16px var(--gold-glow);
+  transition: box-shadow .25s ease;
+}
+
+/* ===== BTS accent: uncomment later if you want it =====
+:root { --bts: #A97CFF; }
+a:hover, .Root__main-view h1 { color: var(--bts) !important; }
+*/
+
+/* ===== Flying bats ===== */
+.Root__main-view::before {
+  --bat: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><path fill='%23C8102E' d='M100 8 L110 28 Q125 20 140 24 Q160 30 198 12 Q180 40 170 62 Q150 52 135 70 Q120 62 112 90 L100 72 L88 90 Q80 62 65 70 Q50 52 30 62 Q20 40 2 12 Q40 30 60 24 Q75 20 90 28 Z'/></svg>");
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .55;
+  background-image: var(--bat), var(--bat), var(--bat), var(--bat);
+  background-size: 90px 45px, 60px 30px, 120px 60px, 48px 24px;
+  background-repeat: no-repeat;
+  background-position: -10% 20%, -30% 55%, -60% 80%, -90% 38%;
+  animation: bats-fly 22s linear infinite;
+}
+
+@keyframes bats-fly {
+  from { background-position: -10% 20%, -30% 55%, -60% 80%, -90% 38%; }
+  50%  { background-position: 55% 8%, 40% 48%, 20% 70%, 10% 30%; }
+  to   { background-position: 115% 18%, 130% 42%, 160% 62%, 190% 26%; }
+}
+
+/* Gentle pulse on the big bat watermark */
+.Root__main-view::after {
+  animation: bat-pulse 6s ease-in-out infinite;
+}
+@keyframes bat-pulse {
+  0%, 100% { opacity: .15; }
+  50%      { opacity: .32; }
+}
+
+
+/* Constellation overlay: softer gold */
+#const-overlay canvas { filter: saturate(.65); }
+#const-frame {
+  box-shadow: 0 0 18px rgba(170,125,45,.22),
+              inset 0 0 40px rgba(170,125,45,.08) !important;
+}
+
+/* Constellation overlay: smooth the dark center "hole" */
+#const-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse at center,
+    rgba(75, 52, 18, .55) 0%,
+    rgba(50, 34, 12, .35) 45%,
+    rgba(0, 0, 0, 0) 85%);
+}
+#const-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, .35) 100%);
+}
+
+/* ===== Corner bats ===== */
+body::before, body::after,
+.Root__top-container::before, .Root__top-container::after {
+  content: "";
+  position: fixed;
+  width: 96px; height: 48px;
+  pointer-events: none;
+  z-index: 60;
+  opacity: .6;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'><path fill='%23C8102E' d='M100 8 L110 28 Q125 20 140 24 Q160 30 198 12 Q180 40 170 62 Q150 52 135 70 Q120 62 112 90 L100 72 L88 90 Q80 62 65 70 Q50 52 30 62 Q20 40 2 12 Q40 30 60 24 Q75 20 90 28 Z'/></svg>") center/contain no-repeat;
+  filter: drop-shadow(0 0 10px rgba(200,16,46,.9));
+  transform: rotate(var(--rot, 0deg));
+  animation: corner-flap 3.2s ease-in-out infinite;
+}
+body::before                 { top: -8px;    left: -14px;  --rot: -28deg; }
+body::after                  { top: -8px;    right: -14px; --rot: 28deg;  animation-delay: -1.1s; }
+.Root__top-container::before { bottom: -8px; left: -14px;  --rot: 28deg;  animation-delay: -2.1s; }
+.Root__top-container::after  { bottom: -8px; right: -14px; --rot: -28deg; animation-delay: -0.6s; }
+
+@keyframes corner-flap {
+  0%, 100% { transform: rotate(var(--rot, 0deg)) scaleY(1);   opacity: .55; }
+  50%      { transform: rotate(var(--rot, 0deg)) scaleY(.75); opacity: .9; }
+}

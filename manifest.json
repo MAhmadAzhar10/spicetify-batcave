@@ -1,0 +1,10 @@
+{
+  "name": "Batcave",
+  "description": "Dark Batcave theme with gold light, a starry sky and drifting bats.",
+  "preview": "screenshot.png",
+  "readme": "README.md",
+  "usercss": "user.css",
+  "schemes": "color.ini",
+  "authors": [{ "name": "MAhmadAzhar10", "url": "https://github.com/MAhmadAzhar10" }],
+  "tags": ["dark", "gold", "bats"]
+}
